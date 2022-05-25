@@ -1,0 +1,120 @@
+.tit {
+  font-weight: 100;
+  font-size: 25px;
+}
+.btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 20%;
+  height: 50px;
+  margin-left: 30px;
+}
+#basic-button {
+  padding: none;
+}
+.btn {
+  margin: 10px;
+  color: darkblue;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+@media (max-width: 800px) {
+  .btns {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+.row-task {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+.col-lg-4 {
+  width: 30%;
+  justify-content: center;
+  background-color: rgb(165, 248, 248);
+  align-content: stretch;
+  padding: 5px;
+  box-shadow: 10px 10px 15px #ccc;
+}
+.task-titl {
+  text-align: center;
+  padding: 5px;
+}
+.task-box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 10px;
+}
+.task-card {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px #ccc;
+  border: 1px solid rgb(177, 174, 174);
+  width: 100%;
+  margin: 5px 0px 5px 0px;
+}
+.task-tit {
+  padding: 10px;
+  font-size: 20px;
+  max-width: 300px;
+  height: max-content;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: inherit;
+  justify-content: center;
+}
+.Tit {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.task-btns {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  color: darkblue;
+}
+@media (max-width: 900px) {
+  .row {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+  .col-lg-3 {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+  }
+  .col-lg-9 {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .row-task {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+  }
+  .col-lg-4 {
+    width: 80%;
+    margin: 10px;
+    position: relative;
+  }
+}

@@ -1,0 +1,205 @@
+.container1 {
+  display: flex;
+  flex-wrap: wrap;
+}
+.row {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(109, 203, 209, 1) 0%,
+    rgba(30, 232, 216, 1) 0%,
+    rgba(8, 251, 236, 1) 0%,
+    rgba(11, 5, 214, 1) 0%,
+    rgba(148, 5, 142, 0.577468487394958) 0%,
+    rgba(8, 139, 144, 1) 0%,
+    rgba(122, 226, 223, 1) 0%,
+    rgba(12, 9, 226, 1) 0%,
+    rgba(41, 219, 184, 1) 0%,
+    rgba(13, 32, 232, 1) 0%,
+    rgba(5, 12, 139, 1) 0%,
+    rgba(134, 215, 232, 1) 0%,
+    rgba(148, 205, 235, 1) 13%,
+    rgba(12, 26, 207, 1) 87%,
+    rgba(8, 30, 184, 1) 100%,
+    rgba(13, 219, 200, 1) 100%
+  );
+}
+.searchbar {
+  margin-left: auto;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  background-color: white;
+}
+.search {
+  width: 500px;
+  height: 30px;
+  border: none;
+  padding: 3px;
+  padding-left: 5px;
+  font-size: 18px;
+  text-decoration: none;
+}
+.search:focus-visible {
+  outline: none;
+}
+.col-lg-3 {
+  background-color: rgb(79, 166, 242);
+  width: 17%;
+  display: flex;
+  flex-direction: column;
+}
+.col-lg-9 {
+  width: 83%;
+  border-left: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.sbar-items {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+.card-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  min-width: 500px;
+  background-color: rgb(142, 222, 248);
+  margin: 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  border-radius: 10px 0px 10px 0px;
+  box-shadow: 10px 10px 18px #ccc, inset 10px 10px 10px rgb(179, 244, 244);
+  border: 1px solid #ccc;
+}
+.card:hover {
+  box-shadow: 10px 10px 20px rgb(172, 169, 169);
+}
+.card-title {
+  text-align: center;
+  padding: 5px;
+  font-size: 23px;
+}
+.card-desc {
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+}
+/* .modal {
+  font-size: 12px;
+} */
+.header {
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(109, 203, 209, 1) 0%,
+    rgba(30, 232, 216, 1) 0%,
+    rgba(8, 251, 236, 1) 0%,
+    rgba(11, 5, 214, 1) 0%,
+    rgba(148, 5, 142, 0.577468487394958) 0%,
+    rgba(8, 139, 144, 1) 0%,
+    rgba(122, 226, 223, 1) 0%,
+    rgba(12, 9, 226, 1) 0%,
+    rgba(41, 219, 184, 1) 0%,
+    rgba(13, 32, 232, 1) 0%,
+    rgba(5, 12, 139, 1) 0%,
+    rgba(134, 215, 232, 1) 0%,
+    rgba(148, 205, 235, 1) 13%,
+    rgba(12, 26, 207, 1) 87%,
+    rgba(8, 30, 184, 1) 100%,
+    rgba(13, 219, 200, 1) 100%
+  );
+  border-bottom: 1px solid gray;
+  font-size: 25pxpx;
+  text-align: center;
+  font-weight: 400;
+  color: white;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 5px 0px 5px 0px;
+}
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.createProject {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+.inp {
+  width: 100%;
+  height: 30px;
+  margin: 10px 0px 10px 0px;
+}
+.desc-inp {
+  width: 100%;
+  height: 60px;
+  margin: 5px;
+}
+.modal > .actions {
+  width: 100%;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 50%;
+  border: 1px solid #979494;
+}
+.close-btn {
+  background-color: red;
+  font-weight: 400;
+  color: white;
+  border: 1px solid rgb(118, 115, 115);
+  margin: 10px;
+  width: 20%;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 5px;
+}
+.create-btn {
+  background-color: rgb(9, 151, 68);
+  font-weight: 400;
+  color: white;
+  border: 1px solid rgb(118, 115, 115);
+  margin: 10px;
+  width: 20%;
+  font-size: 20px;
+  height: 30px;
+  border-radius: 5px;
+}
+lable {
+  font-size: 20px;
+  font-weight: 600;
+}

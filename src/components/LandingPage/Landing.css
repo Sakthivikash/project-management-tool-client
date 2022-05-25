@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  font-size: 50px;
+  color: white;
+}
+.my-3 {
+  font-size: 35px;
+  color: white;
+  margin: 10px;
+}
+.p {
+  font-size: 25px;
+  color: white;
+}
+.signup-btn {
+  margin-top: 20px;
+}
+.row1,
+.row2,
+.row3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.row1,
+.row3 {
+  position: relative;
+  background-color: darkblue;
+}
+.row3 {
+  margin-top: 50px;
+  padding: 10px;
+}
+.row2 {
+  background-color: white;
+  margin-top: 30px;
+}
+
+.card-02 {
+  position: relative;
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+  height: 400px;
+}
+ul {
+  color: white;
+  list-style-type: upper-roman;
+}
+
+.card-03 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+  height: 400px;
+}
+
+@media (max-width: 800px) {
+  .card-01 {
+    flex: 100%;
+    max-width: 800px;
+    min-width: 100px;
+  }
+
+  .card-02 {
+    flex: 100%;
+    max-width: 800px;
+    min-width: 100px;
+    width: 100%;
+  }
+
+  .card-03 {
+    flex: 100%;
+    max-width: 750px;
+  }
+  img {
+    object-fit: fill;
+  }
+}
+.main {
+  position: relative;
+}
+.custom-shape-divider-top-1653295150 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-top-1653295150,
+svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 101px;
+}
+
+.custom-shape-divider-top-1653295150,
+.shape-fill {
+  fill: darkblue;
+}
+.img-fluid {
+  padding: 10px;
+  object-fit: cover;
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+  height: 100%;
+}
+.custom-shape-divider-top-1653302881 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-top-1653302881 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 90px;
+}
+
+.custom-shape-divider-top-1653302881 .shape-fill {
+  fill: #ffffff;
+}

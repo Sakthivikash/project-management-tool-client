@@ -169,7 +169,10 @@ export function Signup() {
             <b>Submit</b>
           </Button>
           <p style={{ textAlign: "center", marginTop: "10px" }}>
-            Already have an account? <a href="/login">Login</a>
+            Already have an account?{" "}
+            <a onClick={() => navigate(`/login`)} style={{ color: "blue" }}>
+              Login
+            </a>
           </p>
         </Box>
       </form>

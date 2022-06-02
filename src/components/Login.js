@@ -137,7 +137,9 @@ export function Login({ loggedIn, setloggedIn }) {
             style={{ textAlign: "center", marginTop: "10px", fontSize: "18px" }}
           >
             Create account?
-            <a href="/signup">Signup</a>
+            <a onClick={() => navigate(`/signup`)} style={{ color: "blue" }}>
+              Signup
+            </a>
           </p>
         </Box>
       </form>

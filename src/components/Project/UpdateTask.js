@@ -63,7 +63,12 @@ export function UpdateTask() {
             <span>
               <AccountCircleRoundedIcon />
             </span>
-            <h4 style={{ cursor: "pointer" }}>Profile</h4>
+            <h4
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate(`/profile`)}
+            >
+              Profile
+            </h4>
           </div>
         </aside>
 

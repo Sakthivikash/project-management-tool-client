@@ -58,3 +58,16 @@
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
+
+@media (max-width: 800px) {
+  .col-lg-4 {
+    width: 80% !important;
+  }
+  .col-lg-8 {
+    width: 80% !important;
+  }
+  .data,
+  .lable {
+    padding: 5px !important;
+  }
+}

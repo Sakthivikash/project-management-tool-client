@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { reactLocalStorage } from "reactjs-localstorage";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 
-export function Profile() {
+export function Profile({ setloggedIn }) {
   let id = reactLocalStorage.getObject("userId", true).userId;
 
   const navigate = useNavigate();
@@ -74,7 +74,10 @@ export function Profile() {
                 color="error"
                 variant="contained"
                 sx={{ margin: "10px 0px 10px 0px" }}
-                onClick={() => navigate("/")}
+                onClick={() => {
+                  navigate("/");
+                  setloggedIn(false);
+                }}
               >
                 Logout
               </Button>

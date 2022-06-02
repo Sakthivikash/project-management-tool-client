@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { reactLocalStorage } from "reactjs-localstorage";
 
@@ -17,7 +17,7 @@ const userValidationSchema = yup.object({
     .min(4, "💡 Need a longer password"),
 });
 
-export function Login({ state, setState }) {
+export function Login({ loggedIn, setloggedIn }) {
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -28,9 +28,9 @@ export function Login({ state, setState }) {
     validationSchema: userValidationSchema,
     onSubmit: async (checkUser) => {
       await sendRequest(checkUser);
-      // dispatch(authActions.login());
-      setState("logout");
+      toast.success("Login successfull");
       navigate(`/home`);
+      setloggedIn(true);
     },
   });
 
@@ -45,8 +45,7 @@ export function Login({ state, setState }) {
       });
 
     const data = await res.data;
-    toast.dark(data.message);
-    console.log(data);
+    console.log(data.message);
     reactLocalStorage.set("userId", true);
     reactLocalStorage.setObject("userId", { userId: data.existingUser._id });
     return data;
@@ -123,6 +122,17 @@ export function Login({ state, setState }) {
           >
             <b>Sign-in</b>
           </Button>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <p
             style={{ textAlign: "center", marginTop: "10px", fontSize: "18px" }}
           >

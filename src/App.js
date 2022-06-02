@@ -14,11 +14,11 @@ import { useState } from "react";
 import { Project } from "./components/Project/Project";
 
 function App() {
-  const [state, setState] = useState("login");
+  const [loggedIn, setloggedIn] = useState(false);
   return (
     <div className="App">
       <header>
-        <Header setState={setState} state={state} />
+        <Header setloggedIn={setloggedIn} loggedIn={loggedIn} />
       </header>
       <main>
         <Routes>
@@ -29,10 +29,13 @@ function App() {
           <Route path="/project/:id" element={<Project />} />
           <Route
             path="/login"
-            element={<Login setState={setState} state={state} />}
+            element={<Login setloggedIn={setloggedIn} loggedIn={loggedIn} />}
           />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={<Profile setloggedIn={setloggedIn} />}
+          />
           <Route path="/edit-profile" element={<UserUpdate />} />
         </Routes>
       </main>

@@ -27,6 +27,7 @@ export function UpdateTask() {
     },
     validationSchema: taskValidationSchema,
     onSubmit: async (updateTask) => {
+      console.log(updateTask);
       await sendRequest(updateTask);
       navigate(`/project/${data.projectId}`);
     },
@@ -44,7 +45,7 @@ export function UpdateTask() {
 
     const data = await res.data;
     alert(data.message);
-
+    console.log(data);
     return data;
   }
   return (

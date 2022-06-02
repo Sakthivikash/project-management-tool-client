@@ -17,7 +17,6 @@ import { reactLocalStorage } from "reactjs-localstorage";
 import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { UpdateTask } from "./UpdateTask";
 
 const projectValidationSchema = yup.object({
   task: yup.string().required("💡 Why not fill the Title?"),
@@ -35,63 +34,57 @@ export function Project() {
   const navigate = useNavigate();
   const [page, setPage] = useState(true);
   const { id } = useParams();
-  console.log(id);
+  const [data, setData] = useState({});
+  const [todo, setToDo] = useState([]);
+  const [inprog, setInProg] = useState([]);
+  const [done, setDone] = useState([]);
 
-  const getProject = async () => {
-    const res = await axios
-      .get(
-        `https://project-management-tool-server.herokuapp.com/projects/${id}`
-      )
-      .catch((err) => console.log(err));
-    const pro = await res.data;
-    reactLocalStorage.set("data", true);
-    reactLocalStorage.setObject("data", { data: pro.project });
+  const getProject = () => {
+    fetch(
+      `https://project-management-tool-server.herokuapp.com/projects/${id}`,
+      { method: "GET" }
+    )
+      .then((data) => data.json())
+      .then((pro) => setData(pro.project));
   };
-  getProject();
-  let data = reactLocalStorage.getObject("data", true).data;
 
-  const getTasksToDo = async () => {
-    const res = await axios
-      .get(
-        `https://project-management-tool-server.herokuapp.com/tasks/to-do/${data._id}`
-      )
+  useEffect(() => getProject(), []);
+
+  //List of Task To Do:
+  const getTasksToDo = () => {
+    fetch(
+      `https://project-management-tool-server.herokuapp.com/tasks/to-do/${id}`,
+      { method: "GET" }
+    )
+      .then((data) => data.json())
+      .then((task) => setToDo(task.tasks))
       .catch((err) => err.response.data.message);
-    const task = await res.data;
-    console.log(task);
-    reactLocalStorage.set("todo", true);
-    reactLocalStorage.setObject("todo", { todo: task.tasks });
-    return task;
   };
-  getTasksToDo();
-  let todo = reactLocalStorage.getObject("todo", true).todo;
+  useEffect(() => getTasksToDo(), []);
 
-  const getTasksInProg = async () => {
-    const res = await axios
-      .get(
-        `https://project-management-tool-server.herokuapp.com/tasks/in-prograss/${data._id}`
-      )
+  //List of In-Prograss tasks:
+  const getTasksInProg = () => {
+    fetch(
+      `https://project-management-tool-server.herokuapp.com/tasks/in-prograss/${id}`,
+      { method: "GET" }
+    )
+      .then((data) => data.json())
+      .then((task) => setInProg(task.tasks))
       .catch((err) => err.response.data.message);
-    const task = await res.data;
-    reactLocalStorage.set("inprog", true);
-    reactLocalStorage.setObject("inprog", { inprog: task.tasks });
-    return task;
   };
-  getTasksInProg();
-  let inprog = reactLocalStorage.getObject("inprog", true).inprog;
+  useEffect(() => getTasksInProg(), []);
 
-  const getTasksDone = async () => {
-    const res = await axios
-      .get(
-        `https://project-management-tool-server.herokuapp.com/tasks/done/${data._id}`
-      )
+  //List of Tasks Done:
+  const getTasksDone = () => {
+    fetch(
+      `https://project-management-tool-server.herokuapp.com/tasks/done/${id}`,
+      { method: "GET" }
+    )
+      .then((data) => data.json())
+      .then((task) => setDone(task.tasks))
       .catch((err) => err.response.data.message);
-    const task = await res.data;
-    reactLocalStorage.set("done", true);
-    reactLocalStorage.setObject("done", { done: task.tasks });
-    return task;
   };
-  getTasksDone();
-  let done = reactLocalStorage.getObject("done", true).done;
+  useEffect(() => getTasksDone(), []);
 
   const formik = useFormik({
     initialValues: {
@@ -166,6 +159,7 @@ export function Project() {
                     reactLocalStorage.set("project", true);
                     reactLocalStorage.setObject("project", { project: data });
                     navigate(`/update-project/${data._id}`);
+                    getProject();
                   }}
                 >
                   <ModeEditOutlineRoundedIcon />
@@ -188,6 +182,8 @@ export function Project() {
                 </div>
               </div>
             </div>
+
+            {/* Task Box */}
             <form className="container-task" onSubmit={formik.handleSubmit}>
               <div className="row-task">
                 <div className="col-lg-4">
@@ -231,7 +227,6 @@ export function Project() {
                   {todo.map((data) => {
                     return (
                       <>
-                        {card === true ? <UpdateTask data={data} /> : <></>}
                         <div className="task-card">
                           <div className="task-tit">
                             <p className="Tit">{data.task}</p>
@@ -268,7 +263,7 @@ export function Project() {
                                   onClick={async () => {
                                     const res = await axios
                                       .put(
-                                        `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
+                                        `http://localhost:5000/tasks/update-task/${data._id}`,
                                         {
                                           task: data.task,
                                           prograss: "To-Do",
@@ -282,6 +277,7 @@ export function Project() {
                                     handleClose();
                                     alert(update.message);
                                     navigate(`/project/${data.projectId}`);
+                                    getTasksToDo();
                                   }}
                                   sx={{ color: "black" }}
                                 >
@@ -290,9 +286,10 @@ export function Project() {
                                 <hr />
                                 <MenuItem
                                   onClick={async () => {
+                                    console.log(data._id);
                                     const res = await axios
                                       .put(
-                                        `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
+                                        `http://localhost:5000/tasks/update-task/${data._id}`,
                                         {
                                           task: data.task,
                                           prograss: "In-Prograss",
@@ -305,8 +302,10 @@ export function Project() {
                                     console.log(update);
                                     handleClose();
                                     alert(update.message);
-                                    getTasksInProg();
+
                                     navigate(`/project/${data.projectId}`);
+                                    getTasksInProg();
+                                    getTasksToDo();
                                   }}
                                   sx={{ color: "black" }}
                                 >
@@ -317,7 +316,7 @@ export function Project() {
                                   onClick={async () => {
                                     const res = await axios
                                       .put(
-                                        `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
+                                        `http://localhost:5000/tasks/update-task/${data._id}`,
                                         {
                                           task: data.task,
                                           prograss: "Done",
@@ -331,6 +330,8 @@ export function Project() {
                                     handleClose();
                                     alert(update.message);
                                     navigate(`/project/${data.projectId}`);
+                                    getTasksDone();
+                                    getTasksToDo();
                                   }}
                                   sx={{ color: "black" }}
                                 >
@@ -362,6 +363,7 @@ export function Project() {
                                   });
                                 alert(await deleteTask.data.message);
                                 navigate(`/project/${data.projectId}`);
+                                getTasksToDo();
                               }}
                             >
                               <DeleteRoundedIcon />
@@ -413,7 +415,7 @@ export function Project() {
                                 onClick={async () => {
                                   const res = await axios
                                     .put(
-                                      `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
+                                      `http://localhost:5000/tasks/update-task/${data._id}`,
                                       {
                                         task: data.task,
                                         prograss: "To-Do",
@@ -427,6 +429,8 @@ export function Project() {
                                   handleClose();
                                   alert(update.message);
                                   navigate(`/project/${data.projectId}`);
+                                  getTasksToDo();
+                                  getTasksInProg();
                                 }}
                                 sx={{ color: "black" }}
                               >
@@ -437,7 +441,7 @@ export function Project() {
                                 onClick={async () => {
                                   const res = await axios
                                     .put(
-                                      `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
+                                      `http://localhost:5000/tasks/update-task/${data._id}`,
                                       {
                                         task: data.task,
                                         prograss: "In-Prograss",
@@ -450,18 +454,22 @@ export function Project() {
                                   console.log(update);
                                   handleClose();
                                   alert(update.message);
+                                  console.log(data._id);
                                   navigate(`/project/${data.projectId}`);
+                                  getTasksInProg();
                                 }}
                                 sx={{ color: "black" }}
                               >
                                 In-Prograss
                               </MenuItem>
                               <hr />
+
                               <MenuItem
                                 onClick={async () => {
+                                  console.log(data._id);
                                   const res = await axios
                                     .put(
-                                      `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
+                                      `http://localhost:5000/tasks/update-task/${data._id}`,
                                       {
                                         task: data.task,
                                         prograss: "Done",
@@ -475,6 +483,8 @@ export function Project() {
                                   handleClose();
                                   alert(update.message);
                                   navigate(`/project/${data.projectId}`);
+                                  getTasksDone();
+                                  getTasksInProg();
                                 }}
                                 sx={{ color: "black" }}
                               >
@@ -506,6 +516,7 @@ export function Project() {
                                 });
                               alert(await deleteTask.data.message);
                               navigate(`/project/${data.projectId}`);
+                              getTasksInProg();
                             }}
                           >
                             <DeleteRoundedIcon />
@@ -556,7 +567,7 @@ export function Project() {
                                 onClick={async () => {
                                   const res = await axios
                                     .put(
-                                      `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
+                                      `http://localhost:5000/tasks/update-task/${data._id}`,
                                       {
                                         task: data.task,
                                         prograss: "To-Do",
@@ -570,6 +581,8 @@ export function Project() {
                                   handleClose();
                                   alert(update.message);
                                   navigate(`/project/${data.projectId}`);
+                                  getTasksToDo();
+                                  getTasksDone();
                                 }}
                                 sx={{ color: "black" }}
                               >
@@ -580,7 +593,7 @@ export function Project() {
                                 onClick={async () => {
                                   const res = await axios
                                     .put(
-                                      `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
+                                      `http://localhost:5000/tasks/update-task/${data._id}`,
                                       {
                                         task: data.task,
                                         prograss: "In-Prograss",
@@ -594,6 +607,8 @@ export function Project() {
                                   handleClose();
                                   alert(update.message);
                                   navigate(`/project/${data.projectId}`);
+                                  getTasksInProg();
+                                  getTasksDone();
                                 }}
                                 sx={{ color: "black" }}
                               >
@@ -604,7 +619,7 @@ export function Project() {
                                 onClick={async () => {
                                   const res = await axios
                                     .put(
-                                      `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
+                                      `http://localhost:5000/tasks/update-task/${data._id}`,
                                       {
                                         task: data.task,
                                         prograss: "Done",
@@ -618,6 +633,7 @@ export function Project() {
                                   handleClose();
                                   alert(update.message);
                                   navigate(`/project/${data.projectId}`);
+                                  getTasksDone();
                                 }}
                                 sx={{ color: "black" }}
                               >
@@ -649,6 +665,7 @@ export function Project() {
                                 });
                               alert(await deleteTask.data.message);
                               navigate(`/project/${data.projectId}`);
+                              getTasksDone();
                             }}
                           >
                             <DeleteRoundedIcon />

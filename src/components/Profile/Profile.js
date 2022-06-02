@@ -7,25 +7,27 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { reactLocalStorage } from "reactjs-localstorage";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import { useEffect, useState } from "react";
 
 export function Profile({ setloggedIn }) {
   let id = reactLocalStorage.getObject("userId", true).userId;
+  const [data, setdata] = useState({});
 
   const navigate = useNavigate();
-  async function sendRequest() {
-    const res = await axios
-      .get(`https://project-management-tool-server.herokuapp.com/user/${id}`)
+  const getUser = () => {
+    fetch(`https://project-management-tool-server.herokuapp.com/user/${id}`, {
+      method: "GET",
+    })
+      .then((data) => data.json())
+      .then((user) => setdata(user.user))
       .catch((err) => {
         alert(err.response.data.message);
       });
+  };
 
-    const data = await res.data;
+  useEffect(() => getUser(), []);
+  console.log(data);
 
-    reactLocalStorage.set("user", true);
-    reactLocalStorage.setObject("user", { user: data.user });
-    return data;
-  }
-  sendRequest();
   return (
     <div className="container1">
       <div className="row">
@@ -62,11 +64,15 @@ export function Profile({ setloggedIn }) {
               <div className="profile-logo">
                 <img src={ProfileImg} alt="Profile-Image" className="pro-img" />
               </div>
-              <h1>{reactLocalStorage.getObject("user", true).user.name}</h1>
+              <h1>{data.name}</h1>
               <Button
                 variant="contained"
                 sx={{ margin: "10px 0px 10px 0px" }}
-                onClick={() => navigate("/edit-profile")}
+                onClick={() => {
+                  reactLocalStorage.set("user", true);
+                  reactLocalStorage.setObject("user", { user: data });
+                  navigate("/edit-profile");
+                }}
               >
                 Edit Profile
               </Button>
@@ -85,27 +91,19 @@ export function Profile({ setloggedIn }) {
             <div className="col-lg-8">
               <div className="field">
                 <div className="lable">Name:</div>
-                <div className="data">
-                  {reactLocalStorage.getObject("user", true).user.name}
-                </div>
+                <div className="data">{data.name}</div>
               </div>
               <div className="field">
                 <div className="lable">Email:</div>
-                <div className="data">
-                  {reactLocalStorage.getObject("user", true).user.email}
-                </div>
+                <div className="data">{data.email}</div>
               </div>
               <div className="field">
                 <div className="lable">Job:</div>
-                <div className="data">
-                  {reactLocalStorage.getObject("user", true).user.job}
-                </div>
+                <div className="data">{data.job}</div>
               </div>
               <div className="field">
                 <div className="lable">Institution/Company:</div>
-                <div className="data">
-                  {reactLocalStorage.getObject("user", true).user.institution}
-                </div>
+                <div className="data">{data.institution}</div>
               </div>
             </div>
           </div>

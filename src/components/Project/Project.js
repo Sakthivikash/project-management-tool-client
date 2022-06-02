@@ -263,7 +263,7 @@ export function Project() {
                                   onClick={async () => {
                                     const res = await axios
                                       .put(
-                                        `http://localhost:5000/tasks/update-task/${data._id}`,
+                                        `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
                                         {
                                           task: data.task,
                                           prograss: "To-Do",
@@ -289,7 +289,7 @@ export function Project() {
                                     console.log(data._id);
                                     const res = await axios
                                       .put(
-                                        `http://localhost:5000/tasks/update-task/${data._id}`,
+                                        `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
                                         {
                                           task: data.task,
                                           prograss: "In-Prograss",
@@ -316,7 +316,7 @@ export function Project() {
                                   onClick={async () => {
                                     const res = await axios
                                       .put(
-                                        `http://localhost:5000/tasks/update-task/${data._id}`,
+                                        `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
                                         {
                                           task: data.task,
                                           prograss: "Done",
@@ -415,7 +415,7 @@ export function Project() {
                                 onClick={async () => {
                                   const res = await axios
                                     .put(
-                                      `http://localhost:5000/tasks/update-task/${data._id}`,
+                                      `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
                                       {
                                         task: data.task,
                                         prograss: "To-Do",
@@ -441,7 +441,7 @@ export function Project() {
                                 onClick={async () => {
                                   const res = await axios
                                     .put(
-                                      `http://localhost:5000/tasks/update-task/${data._id}`,
+                                      `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
                                       {
                                         task: data.task,
                                         prograss: "In-Prograss",
@@ -469,7 +469,7 @@ export function Project() {
                                   console.log(data._id);
                                   const res = await axios
                                     .put(
-                                      `http://localhost:5000/tasks/update-task/${data._id}`,
+                                      `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
                                       {
                                         task: data.task,
                                         prograss: "Done",
@@ -567,7 +567,7 @@ export function Project() {
                                 onClick={async () => {
                                   const res = await axios
                                     .put(
-                                      `http://localhost:5000/tasks/update-task/${data._id}`,
+                                      `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
                                       {
                                         task: data.task,
                                         prograss: "To-Do",
@@ -593,7 +593,7 @@ export function Project() {
                                 onClick={async () => {
                                   const res = await axios
                                     .put(
-                                      `http://localhost:5000/tasks/update-task/${data._id}`,
+                                      `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
                                       {
                                         task: data.task,
                                         prograss: "In-Prograss",
@@ -619,7 +619,7 @@ export function Project() {
                                 onClick={async () => {
                                   const res = await axios
                                     .put(
-                                      `http://localhost:5000/tasks/update-task/${data._id}`,
+                                      `https://project-management-tool-server.herokuapp.com/tasks/update-task/${data._id}`,
                                       {
                                         task: data.task,
                                         prograss: "Done",

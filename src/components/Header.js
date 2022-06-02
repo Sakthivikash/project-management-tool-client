@@ -69,7 +69,7 @@ export function Header({ setloggedIn, loggedIn }) {
             <Button
               onClick={() => {
                 navigate("/");
-                setloggedIn(true);
+                setloggedIn(false);
               }}
               color="primary"
               variant="contained"
